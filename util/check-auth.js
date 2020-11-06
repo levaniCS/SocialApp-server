@@ -8,7 +8,6 @@ module.exports = (context) => {
   if(authHeader){
     const token = authHeader.split('Bearer ')[1]
     if(token){
-      console.log(token)
       try {
         const user = jwt.verify(token, JWT_SECRET)
         return user
