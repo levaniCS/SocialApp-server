@@ -9,6 +9,8 @@ const { MONGODB, PORT } = require('./config')
 
 const pubsub = new PubSub()
 
+const SERVER_PORT = process.env.port || PORT
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -24,8 +26,11 @@ mongoose.connect(MONGODB, {
 })
   .then(() => {
     console.log('DB connection successful!')
-    return server.listen({ port: PORT })
+    return server.listen({ port: SERVER_PORT })
   })
   .then(res => {
     console.log(`Server running at ${res.url}`)
+  })
+  .catch(err => {
+    console.error(err)
   })
