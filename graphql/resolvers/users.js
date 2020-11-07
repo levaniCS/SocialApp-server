@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const { UserInputError } = require('apollo-server')
 
 const {validateRegisterInput, validateLoginInput} = require('../../util/validators')
-const { JWT_SECRET, JWT_EXPIRES } = require('../../config')
+const { JWT_SECRET, JWT_EXPIRES } = require('../../Config')
 const User = require('../../models/User')
 
 const generateToken = (user) => {
