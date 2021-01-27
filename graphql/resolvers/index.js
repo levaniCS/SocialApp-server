@@ -1,6 +1,7 @@
 const postsResolvers = require('./posts')
 const usersResolvers = require('./users')
 const commentsResolvers = require('./comments')
+const messagesResolvers = require('./messages')
 
 module.exports = {
   Post: {
@@ -11,14 +12,17 @@ module.exports = {
   },
   Query: {
     ...postsResolvers.Query,
-    ...commentsResolvers.Query
+    ...commentsResolvers.Query,
+    ...messagesResolvers.Query
   },
   Mutation: {
     ...usersResolvers.Mutation,
     ...postsResolvers.Mutation,
-    ...commentsResolvers.Mutation
+    ...commentsResolvers.Mutation,
+    ...messagesResolvers.Mutation
   },
   Subscription: {
-    ...postsResolvers.Subscription
+    ...postsResolvers.Subscription,
+    ...messagesResolvers.Subscription
   }
 }

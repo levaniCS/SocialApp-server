@@ -3,6 +3,8 @@ const { AuthenticationError } = require('apollo-server')
 const Post = require('../../models/Post')
 const checkAuth = require('../../util/check-auth')
 
+const { NEW_POST } = require('../../util/constants')
+
 module.exports = {
   Query: {
     async getPosts(){
@@ -45,7 +47,7 @@ module.exports = {
 
       const post = await newPost.save()
 
-      context.pubsub.publish('NEW_POST', { newPost: post })
+      context.pubsub.publish(NEW_POST, { newPost: post })
 
       return post
     },
@@ -67,7 +69,7 @@ module.exports = {
   },
   Subscription: {
     newPost: {
-      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('NEW_POST')
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator([NEW_POST])
     }
   }
 }

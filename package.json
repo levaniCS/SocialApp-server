@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index",
     "start": "node index",
-    "serve": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "node index"
   },
   "keywords": [],
   "author": "",

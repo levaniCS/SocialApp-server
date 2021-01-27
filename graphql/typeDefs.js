@@ -12,6 +12,14 @@ module.exports = gql`
     commentCount: Int!
   }
 
+  type Message {
+    id: ID!
+    user: User!
+    username: String!
+    content: String!
+    createdAt: String!
+  }
+
   type Comment {
     id: ID!
     createdAt: String!
@@ -42,6 +50,7 @@ module.exports = gql`
   type Query {
     getPosts: [Post]
     getPost(postId: ID!): Post
+    getMessages: [Message!]
   }
 
   type Mutation {
@@ -52,10 +61,12 @@ module.exports = gql`
     createComment(postId: ID!, body: String!) : Post!
     deleteComment(postId: ID!, commentId: ID!) : Post!
     likePost(postId: ID!): Post!
+    postMessage(content: String!): ID! 
   }
 
 
   type Subscription {
     newPost: Post!
+    newMessages: [Message!]
   }
 `
