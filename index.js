@@ -12,8 +12,11 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   cors: {
-    credentials: true,
-    origin: true
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true
     // origin: (origin, callback) => {
     //   const whitelist = ['http://localhost:3000', 'https://jolly-wiles-d92a29.netlify.app']
     //   console.log(origin)
