@@ -11,10 +11,25 @@ const pubsub = new PubSub()
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  cors: true,
+  cors: {
+    credentials: true,
+    origin: (origin, callback) => {
+        const whitelist = [
+            "http://localhost:3000",
+            "https://warm-bastion-27092.herokuapp.com"
+        ];
+
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
+    }
+  },
   //It takes req.body and puts in context
   context: ({ req }) => ({ req, pubsub })
 })
+
 
 mongoose.connect(MONGODB, { 
   useNewUrlParser: true,
