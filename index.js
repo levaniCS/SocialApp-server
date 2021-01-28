@@ -14,16 +14,12 @@ const server = new ApolloServer({
   cors: {
     credentials: true,
     origin: (origin, callback) => {
-        const whitelist = [
-            "http://localhost:3000",
-            "https://warm-bastion-27092.herokuapp.com"
-        ];
-
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error("Not allowed by CORS"))
-        }
+      const whitelist = ['http://localhost:3000', 'https://jolly-wiles-d92a29.netlify.app']
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
     }
   },
   //It takes req.body and puts in context
