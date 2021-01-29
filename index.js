@@ -24,10 +24,6 @@ app.use(cors())
 
 server.applyMiddleware({ 
   app,
-  cors: {
-    credentials: true,
-    origin: 'https://jolly-wiles-d92a29.netlify.app'
-  },
   path: '/graphql'
 })
 
