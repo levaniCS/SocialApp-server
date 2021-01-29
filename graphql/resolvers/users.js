@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const { UserInputError } = require('apollo-server')
+const { UserInputError } = require('apollo-server-express')
 
 const {validateRegisterInput, validateLoginInput} = require('../../util/validators')
 const { JWT_SECRET, JWT_EXPIRES } = require('../../config')
