@@ -20,16 +20,14 @@ const server = new ApolloServer({
 
 const app = express()
 // enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
-app.use(cors())
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", '*');
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-  next();
-})
+const corsOptions = {
+  origin: 'https://jolly-wiles-d92a29.netlify.app/',
+  credentials: true // <-- REQUIRED backend setting
+}
+app.use(cors(corsOptions))
 
-server.applyMiddleware({ app })
+// disables the apollo-server-express cors to allow the cors middleware use
+server.applyMiddleware({ app, cors: false })
 
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
