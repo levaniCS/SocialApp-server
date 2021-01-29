@@ -2,6 +2,7 @@ const express = require('express')
 const http = require('http')
 const { ApolloServer, PubSub } = require('apollo-server-express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
@@ -18,6 +19,9 @@ const server = new ApolloServer({
 })
 
 const app = express()
+// enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
+app.use(cors())
+
 server.applyMiddleware({ 
   app,
   cors: {
