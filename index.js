@@ -21,7 +21,7 @@ const server = new ApolloServer({
 const app = express()
 // enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
 const corsOptions = {
-  origin: 'https://jolly-wiles-d92a29.netlify.app/',
+  origin: 'https://jolly-wiles-d92a29.netlify.app',
   credentials: true // <-- REQUIRED backend setting
 }
 app.use(cors(corsOptions))
