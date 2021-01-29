@@ -11,22 +11,6 @@ const pubsub = new PubSub()
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  cors: {
-    credentials: true,
-    origin: '*'
-    // origin: (origin, callback) => {
-    //   const whitelist = [
-    //     'http://localhost:3000', 
-    //     'https://jolly-wiles-d92a29.netlify.app',
-    //     'https://jolly-wiles-d92a29.netlify.app/'
-    //   ]
-    //   if (whitelist.indexOf(origin) !== -1) {
-    //     callback(null, true)
-    //   } else {
-    //     callback(new Error('Not allowed by CORS'))
-    //   }
-    // }
-  },
   //It takes req.body and puts in context
   context: ({ req }) => ({ req, pubsub })
 })
