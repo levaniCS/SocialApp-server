@@ -7,7 +7,7 @@ const cors = require('cors')
 const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
 
-const { MONGODB } = require('./config')
+const { MONGODB, PORT } = require('./config')
 
 const pubsub = new PubSub()
 
@@ -24,10 +24,10 @@ const corsOptions = {
   origin: 'https://jolly-wiles-d92a29.netlify.app',
   credentials: true // <-- REQUIRED backend setting
 }
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 
 // disables the apollo-server-express cors to allow the cors middleware use
-server.applyMiddleware({ app, cors: false })
+server.applyMiddleware({ app, cors: corsOptions })
 
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
@@ -40,7 +40,7 @@ mongoose.connect(MONGODB, {
 })
   .then(() => {
     console.log('DB connection successful!')
-    return httpServer.listen({ port: process.env.PORT || 4000 })
+    return httpServer.listen({ port: PORT || 4000 })
   })
   .then(() => {
     console.log(`🚀 Server running at http://localhost:4000${server.graphqlPath}`)
