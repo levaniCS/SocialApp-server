@@ -19,13 +19,11 @@ const server = new ApolloServer({
 })
 
 const app = express()
-
-app.use(cors({
-  origin: 'https://jolly-wiles-d92a29.netlify.app/',
-  credentials: true
-}))
 // disables the apollo-server-express cors to allow the cors middleware use
-server.applyMiddleware({ app, cors: false })
+server.applyMiddleware({ app, cors: {
+  origin: 'http://localhost:3000',
+  credentials: true
+}})
 
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
