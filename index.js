@@ -19,11 +19,14 @@ const server = new ApolloServer({
 })
 
 const app = express()
+app.use(cors(
+  {
+    credentials: true,
+    origin: new RegExp('/*/')
+  }
+))
 // disables the apollo-server-express cors to allow the cors middleware use
-server.applyMiddleware({ app, cors: {
-  origin: '*',
-  credentials: false
-}})
+server.applyMiddleware({ app, cors: false })
 
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
