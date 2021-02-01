@@ -19,15 +19,13 @@ const server = new ApolloServer({
 })
 
 const app = express()
-// enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
-const corsOptions = {
-  origin: 'https://jolly-wiles-d92a29.netlify.app',
-  credentials: true // <-- REQUIRED backend setting
-}
-// app.use(cors(corsOptions))
 
+app.use(cors({
+  origin: 'https://jolly-wiles-d92a29.netlify.app/',
+  credentials: true
+}))
 // disables the apollo-server-express cors to allow the cors middleware use
-server.applyMiddleware({ app, cors: corsOptions })
+server.applyMiddleware({ app, cors: false })
 
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
@@ -44,6 +42,7 @@ mongoose.connect(MONGODB, {
   })
   .then(() => {
     console.log(`🚀 Server running at http://localhost:4000${server.graphqlPath}`)
+    console.log(process.env.NODE_ENV)
   })
   .catch(err => {
     console.error(err)

@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index",
-    "start": "node index",
-    "serve": "node index"
+    "dev": "set NODE_ENV=development && nodemon index",
+    "start": "set NODE_ENV=development && node index",
+    "serve": "set NODE_ENV=production && node index"
   },
   "keywords": [],
   "author": "",
