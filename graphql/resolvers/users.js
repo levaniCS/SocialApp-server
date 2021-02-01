@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 const { UserInputError } = require('apollo-server-express')
 
 const {validateRegisterInput, validateLoginInput} = require('../../util/validators')
-const { JWT_SECRET, JWT_EXPIRES } = require('../../config')
 const User = require('../../models/User')
 
 const generateToken = (user) => {
@@ -12,7 +11,7 @@ const generateToken = (user) => {
     id: user.id,
     email: user.email,
     username: user.username
-  }, JWT_SECRET, { expiresIn: JWT_EXPIRES })
+  }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES })
 }
 
 module.exports = {

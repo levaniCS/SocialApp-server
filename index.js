@@ -3,11 +3,16 @@ const http = require('http')
 const { ApolloServer, PubSub } = require('apollo-server-express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const dotenv = require('dotenv')
 
+// for defining enviroment variables
+dotenv.config({
+  path: '.env'
+})
+console.log(process.env.NODE_ENV)
+console.log(process.env.JWT_SECRET)
 const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
-
-const { MONGODB, PORT } = require('./config')
 
 const pubsub = new PubSub()
 
@@ -31,7 +36,7 @@ server.applyMiddleware({ app, cors: false })
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
 
-mongoose.connect(MONGODB, { 
+mongoose.connect(process.env.MONGODB, { 
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -39,11 +44,10 @@ mongoose.connect(MONGODB, {
 })
   .then(() => {
     console.log('DB connection successful!')
-    return httpServer.listen({ port: PORT || 4000 })
+    return httpServer.listen({ port: process.env.PORT || 4000 })
   })
   .then(() => {
     console.log(`🚀 Server running at http://localhost:4000${server.graphqlPath}`)
-    console.log(process.env.NODE_ENV)
   })
   .catch(err => {
     console.error(err)
