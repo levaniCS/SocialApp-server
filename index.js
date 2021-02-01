@@ -21,8 +21,8 @@ const server = new ApolloServer({
 const app = express()
 // disables the apollo-server-express cors to allow the cors middleware use
 server.applyMiddleware({ app, cors: {
-  origin: 'http://localhost:3000',
-  credentials: true
+  origin: '*',
+  credentials: false
 }})
 
 const httpServer = http.createServer(app)
